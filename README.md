@@ -38,3 +38,27 @@
 3. [cite_start]Explore the analysis in `notebooks/eda-fraud-data.ipynb`[cite: 98].
 # Improved-detection-of-fraud-cases-for-e-commerce-and-bank-transactions
 A key challenge in fraud detection is managing the trade-off between security and user experience. False positives (incorrectly flagging legitimate transactions) can alienate customers, while false negatives (missing actual fraud) lead to direct financial loss. 
+# Improved Detection of Fraud Cases for E-commerce and Bank Transactions
+
+## Project Overview
+[cite_start]This project, developed for Adey Innovations Inc., focuses on building a robust end-to-end fraud detection system for e-commerce and banking sectors[cite: 10, 11]. [cite_start]The goal is to identify fraudulent activities accurately while balancing the trade-off between security and user experience (minimizing False Positives and False Negatives) [cite: 16-18].
+
+## Key Features
+- [cite_start]**Geolocation Integration**: Mapping IP addresses to countries to identify high-risk regions [cite: 127-130].
+- [cite_start]**Feature Engineering**: Creation of time-based features (e.g., `time_since_signup`) and transaction velocity metrics [cite: 132-137].
+- [cite_start]**Imbalance Handling**: Utilization of SMOTE to balance the highly skewed fraud datasets[cite: 141, 142].
+- [cite_start]**Model Explainability**: Integration of SHAP and LIME to provide transparency into model decisions [cite: 167-172].
+- [cite_start]**Real-time API**: A Flask-based REST API for immediate fraud prediction[cite: 20, 230].
+- [cite_start]**Interactive Dashboard**: A Dash application for visualizing global fraud trends[cite: 229, 237].
+
+## Project Structure
+- [cite_start]`data/`: Raw and processed datasets[cite: 89].
+- [cite_start]`models/`: Saved model artifacts (.pkl files)[cite: 108].
+- [cite_start]`notebooks/`: Jupyter notebooks for EDA, Feature Engineering, Modeling, and Explainability[cite: 93].
+- [cite_start]`src/`: Source code for the Flask API and Dash Dashboard[cite: 104].
+- [cite_start]`scripts/`: Utility scripts for data processing[cite: 110].
+
+## Installation and Setup
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
