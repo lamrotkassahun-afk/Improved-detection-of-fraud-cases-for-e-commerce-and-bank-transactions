@@ -62,3 +62,9 @@ A key challenge in fraud detection is managing the trade-off between security an
 1. Clone the repository:
    ```bash
    git clone <repository-url>
+   ## 🛠️ Machine Learning Pipeline (Refined)
+Following industry best practices, the modeling phase now includes:
+- **Baseline Establishment**: Logistic Regression serves as the performance floor.
+- **Stratified K-Fold CV**: Ensures model reliability across imbalanced data subsets.
+- **Ensemble Comparison**: Rigorous evaluation of Decision Trees, Random Forest, and Gradient Boosting.
+- **Model Selection**: The final model was chosen based on AUC-PR (Area Under Precision-Recall Curve), which is superior for fraud detection than standard accuracy.
