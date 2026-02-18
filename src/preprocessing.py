@@ -1,27 +1,27 @@
 import pandas as pd
-from sklearn.preprocessing import StandardScaler, LabelEncoder
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
 
 class FraudPreprocessor:
     def __init__(self):
-        self.scaler = StandardScaler()
-        self.label_encoders = {}
-        self.numerical_cols = ['purchase_value', 'age'] # From Fraud_Data.csv [cite: 31, 36]
-        self.categorical_cols = ['source', 'browser', 'sex'] # From Fraud_Data.csv [cite: 33, 34, 35]
+        self.scaler = MinMaxScaler()
 
-    def fit_transform(self, df):
-        # 1. Handle Categorical Encoding [cite: 140]
-        for col in self.categorical_cols:
-            le = LabelEncoder()
-            df[col] = le.fit_transform(df[col].astype(str))
-            self.label_encoders[col] = le
-        
-        # 2. Scale Numerical Features [cite: 139]
-        df[self.numerical_cols] = self.scaler.fit_transform(df[self.numerical_cols])
+    def clean_data(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Fills missing numerical values with the median[cite: 16]."""
+        df = df.copy()
+        df['purchase_value'] = df['purchase_value'].fillna(df['purchase_value'].median())
         return df
 
-    def transform(self, df):
-        # Apply same transformations for inference (no fitting)
-        for col, le in self.label_encoders.items():
-            df[col] = le.transform(df[col].astype(str))
-        df[self.numerical_cols] = self.scaler.transform(df[self.numerical_cols])
+    def encode_features(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Converts categorical features into dummy variables[cite: 16]."""
+        return pd.get_dummies(df, columns=['source', 'browser', 'sex'], drop_first=True)
+
+    def scale_features(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Scales numerical features to a 0-1 range[cite: 31]."""
+        df = df.copy()
+        df[['age']] = self.scaler.fit_transform(df[['age']])
         return df
+
+    def align_features(self, df: pd.DataFrame, expected_columns: list) -> pd.DataFrame:
+        """Ensures the dataframe matches the model's training schema[cite: 31]."""
+        return df.reindex(columns=expected_columns, fill_value=0)
